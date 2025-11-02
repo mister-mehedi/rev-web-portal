@@ -1,66 +1,281 @@
-/* public/css/style.css */
-body {
-  font-family: Arial, sans-serif;
-  margin: 20px;
-  color: #222;
+/* public/css/style.css
+   Tier-2 colorized theme:
+   Background white; important points use green palette with varying transparency.
+*/
+
+:root {
+  --bg: #ffffff;
+  --mint: #A8FBD3;
+  /* light mint (accent) */
+  --teal: #4FB7B3;
+  /* primary green/teal (important) */
+  --blue: #637AB9;
+  /* secondary accent (charts, subtle contrast) */
+  --indigo: #31326F;
+  /* dark text / headings */
+  /* rgba variants */
+  --mint-10: rgba(168, 251, 211, 0.10);
+  --mint-20: rgba(168, 251, 211, 0.20);
+  --teal-08: rgba(79, 183, 179, 0.08);
+  --teal-12: rgba(79, 183, 179, 0.12);
+  --teal-18: rgba(79, 183, 179, 0.18);
+  --indigo-08: rgba(49, 50, 111, 0.08);
+  --blue-10: rgba(99, 122, 185, 0.10);
+  --shadow: 0 6px 18px rgba(49, 50, 111, 0.08);
 }
 
+/* Base */
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+  background: var(--bg);
+  color: var(--indigo);
+  font-family: Inter, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.45;
+}
+
+
+
+/* Container */
 .container {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 28px auto;
+  padding: 22px;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 1) 0%, var(--mint-10) 100%);
+  border-radius: 12px;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--mint-20);
 }
 
+/* Headings */
+h1 {
+  margin: 0 0 12px 0;
+  font-size: 1.6rem;
+  color: var(--indigo);
+  letter-spacing: -0.2px;
+}
+
+h3 {
+  color: var(--indigo);
+  margin: 6px 0 10px;
+}
+
+/* Tabs */
 .tabs {
-  margin-bottom: 15px;
+  display: flex;
+  gap: 8px;
+  margin-bottom: 18px;
 }
 
 .tab-btn {
-  margin-right: 8px;
-  padding: 6px 12px;
-  border: 1px solid #ddd;
+  padding: 8px 14px;
+  border-radius: 8px;
+  border: 1px solid transparent;
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(255, 255, 255, 0.85));
+  color: var(--indigo);
   cursor: pointer;
-  background: #f8f8f8;
+  font-weight: 600;
+  box-shadow: none;
+  transition: all .18s ease;
+}
+
+.tab-btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(79, 183, 179, 0.06);
 }
 
 .tab-btn.active {
-  background: #1976d2;
+  background: linear-gradient(180deg, var(--teal), var(--mint));
   color: white;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  box-shadow: 0 8px 20px rgba(79, 183, 179, 0.18);
 }
 
+/* Panel cards */
 .tab-panel {
-  margin-bottom: 20px;
-  padding: 10px;
-  border: 1px solid #eee;
-  border-radius: 6px;
+  padding: 16px;
+  border-radius: 10px;
+  border: 1px solid var(--mint-10);
+  background: linear-gradient(180deg, rgba(250, 255, 252, 0.9), rgba(255, 255, 255, 0.95));
+  margin-bottom: 18px;
 }
 
+.tab-panel .query-form {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Inputs */
+.query-form label {
+  font-size: 0.85rem;
+  color: var(--indigo);
+  margin-right: 6px;
+}
+
+.query-form input[type="text"],
+.query-form input[type="number"],
+.query-form .date-input {
+  padding: 8px 10px;
+  border-radius: 8px;
+  border: 1px solid var(--mint-20);
+  background: linear-gradient(180deg, #fff, var(--mint-10));
+  min-width: 160px;
+  outline: none;
+  transition: border-color .12s ease, box-shadow .12s ease;
+}
+
+.query-form input:focus {
+  border-color: var(--teal);
+  box-shadow: 0 6px 20px var(--teal-08);
+}
+
+/* Form submit */
+.query-form button {
+  padding: 10px 14px;
+  border-radius: 8px;
+  border: none;
+  font-weight: 700;
+  cursor: pointer;
+  background: linear-gradient(180deg, rgba(79, 183, 179, 1), rgba(79, 183, 179, 0.88));
+  color: #fff;
+  box-shadow: 0 8px 18px var(--teal-18);
+  transition: transform .12s ease, box-shadow .12s ease;
+}
+
+.query-form button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(79, 183, 179, 0.24);
+}
+
+/* Results area */
+#results-area {
+  margin-top: 18px;
+  padding: 12px;
+  border-radius: 10px;
+  border: 1px solid var(--mint-20);
+  background: linear-gradient(180deg, rgba(248, 255, 250, 0.98), rgba(255, 255, 255, 1));
+}
+
+/* Controls */
+.results-controls {
+  display: flex;
+  gap: 10px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.results-controls button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid rgba(79, 183, 179, 0.12);
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.98), var(--mint-10));
+  cursor: pointer;
+  color: var(--indigo);
+  font-weight: 600;
+  transition: background .12s ease, transform .12s ease;
+}
+
+.results-controls button:hover {
+  background: linear-gradient(180deg, rgba(79, 183, 179, 0.10), rgba(79, 183, 179, 0.06));
+  transform: translateY(-2px);
+}
+
+.results-controls button:active {
+  transform: translateY(0);
+}
+
+/* Table styling */
+table.dataTable,
+table {
+  width: 100%;
+  border-collapse: collapse;
+  background: transparent;
+}
+
+thead tr {
+  background: linear-gradient(90deg, rgba(79, 183, 179, 0.12), rgba(99, 122, 185, 0.06));
+}
+
+thead th {
+  color: var(--indigo);
+  font-weight: 700;
+  padding: 10px 12px;
+  border-bottom: 1px solid var(--mint-20);
+  text-align: left;
+}
+
+tbody td {
+  padding: 10px 12px;
+  border-bottom: 1px solid rgba(49, 50, 111, 0.04);
+  color: var(--indigo);
+  font-size: 0.95rem;
+}
+
+/* Highlight odd rows gently */
+tbody tr:nth-child(odd) {
+  background: linear-gradient(180deg, rgba(168, 251, 211, 0.02), rgba(255, 255, 255, 0));
+}
+
+/* Table search/paging elements (DataTables) styling */
+.dataTables_wrapper .dataTables_filter input {
+  border-radius: 8px;
+  border: 1px solid var(--mint-20);
+  padding: 6px 8px;
+}
+
+/* Chart container */
+#results-chart {
+  display: block;
+  width: 100%;
+  height: 320px;
+  margin-top: 12px;
+  border-radius: 8px;
+  background: linear-gradient(180deg, rgba(99, 122, 185, 0.02), rgba(79, 183, 179, 0.02));
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+}
+
+/* Small responsive tweaks */
+@media (max-width: 900px) {
+  .query-form {
+    gap: 8px;
+  }
+
+  .query-form input {
+    min-width: 120px;
+    width: 100%;
+  }
+
+  .tab-btn {
+    font-size: 0.9rem;
+    padding: 8px 10px;
+  }
+}
+
+/* Focus outlines (keyboard) */
+.tab-btn:focus,
+.query-form button:focus,
+.results-controls button:focus {
+  outline: 3px solid var(--teal-12);
+  outline-offset: 2px;
+}
+
+/* Utility hidden */
 .hidden {
   display: none;
 }
 
-.query-form label {
-  display: block;
+/* Footer tiny note */
+.footer-note {
+  font-size: 0.82rem;
+  color: rgba(49, 50, 111, 0.6);
   margin-top: 8px;
-}
-
-.query-form input {
-  padding: 6px;
-  margin-top: 4px;
-  display: block;
-  width: 220px;
-}
-
-.query-form button {
-  margin-top: 10px;
-  padding: 8px 12px;
-}
-
-.results-controls {
-  margin-top: 10px;
-  margin-bottom: 10px;
-}
-
-#results-chart {
-  max-width: 100%;
-  height: 300px;
 }
