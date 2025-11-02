@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Query Results</title>
+</head>
+
+<body>
+  <h1>Query Results</h1>
+  <table border="1">
+    <thead>
+      <tr>
+        <% if (data.length) { Object.keys(data[0]).forEach(key=> { %>
+          <th>
+            <%= key %>
+          </th>
+          <% }) } %>
+      </tr>
+    </thead>
+    <tbody>
+      <% data.forEach(row=> { %>
+        <tr>
+          <% Object.values(row).forEach(val=> { %>
+            <td>
+              <%= val %>
+            </td>
+            <% }) %>
+        </tr>
+        <% }) %>
+    </tbody>
+  </table>
+  <a href="/">Back to Dashboard</a>
+</body>
+
+</html>

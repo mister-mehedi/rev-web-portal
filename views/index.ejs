@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>Voice Data Portal</title>
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+  <h1>Voice Data & Zone Sales Portal</h1>
+
+  <h2>1. VDD F2 Day Chunk Summary</h2>
+  <form action="/day-chunk-summary" method="POST">
+    Base Date (DD-MON-YY): <input type="text" name="baseDate" required><br>
+    Chunk Days: <input type="number" name="chunkDays" required><br>
+    Number of Chunks: <input type="number" name="numChunks" required><br>
+    <button type="submit">Run Query</button>
+  </form>
+
+  <h2>2. VDD F2 Month Chunk Summary</h2>
+  <form action="/month-chunk-summary" method="POST">
+    Base Month (YYYYMM): <input type="text" name="baseMonth" required><br>
+    Chunk Months: <input type="number" name="chunkMonths" required><br>
+    <button type="submit">Run Query</button>
+  </form>
+
+  <h2>3. Zone Sales FO Day Chunk Summary</h2>
+  <form action="/fo-day-chunk-summary" method="POST">
+    Base Date (DD-MON-YY): <input type="text" name="baseDate" required><br>
+    Chunk Days: <input type="number" name="chunkDays" required><br>
+    Number of Chunks: <input type="number" name="numChunks" required><br>
+    <button type="submit">Run Query</button>
+  </form>
+
+  <h2>4. Zone Sales FO Month Chunk Summary</h2>
+  <form action="/fo-month-chunk-summary" method="POST">
+    Base Month (YYYYMM): <input type="text" name="baseMonth" required><br>
+    Chunk Months: <input type="number" name="chunkMonths" required><br>
+    <button type="submit">Run Query</button>
+  </form>
+</body>
+
+</html>
