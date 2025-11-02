@@ -1,43 +1,110 @@
+<!-- views/index.ejs -->
 <!DOCTYPE html>
 <html>
 
 <head>
-  <title>Voice Data Portal</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <meta charset="utf-8" />
+  <title>Voice Data Portal — Tier 2</title>
+
+  <!-- CSS libs -->
+  <link href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css" rel="stylesheet" />
+  <link href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css" rel="stylesheet" />
+
+  <link rel="stylesheet" href="/css/style.css" />
 </head>
 
 <body>
-  <h1>Voice Data & Zone Sales Portal</h1>
+  <div class="container">
+    <h1>Voice Data & Zone Sales — Tier 2</h1>
 
-  <h2>1. VDD F2 Day Chunk Summary</h2>
-  <form action="/day-chunk-summary" method="POST">
-    Base Date (DD-MON-YY): <input type="text" name="baseDate" required><br>
-    Chunk Days: <input type="number" name="chunkDays" required><br>
-    Number of Chunks: <input type="number" name="numChunks" required><br>
-    <button type="submit">Run Query</button>
-  </form>
+    <div class="tabs">
+      <button class="tab-btn active" data-tab="dayChunk">VDD Day Chunk</button>
+      <button class="tab-btn" data-tab="monthChunk">VDD Month Chunk</button>
+      <button class="tab-btn" data-tab="foDay">FO Day Chunk</button>
+      <button class="tab-btn" data-tab="foMonth">FO Month Chunk</button>
+    </div>
 
-  <h2>2. VDD F2 Month Chunk Summary</h2>
-  <form action="/month-chunk-summary" method="POST">
-    Base Month (YYYYMM): <input type="text" name="baseMonth" required><br>
-    Chunk Months: <input type="number" name="chunkMonths" required><br>
-    <button type="submit">Run Query</button>
-  </form>
+    <!-- Day chunk form -->
+    <div class="tab-panel" id="dayChunk">
+      <h3>VDD Day Chunk Summary</h3>
+      <form id="form-day-chunk" class="query-form">
+        <label>Base Date</label>
+        <input type="text" name="baseDate" class="date-input" placeholder="DD-MON-YY" required />
+        <label>Chunk Days</label>
+        <input type="number" name="chunkDays" value="30" required />
+        <label>Number of Chunks</label>
+        <input type="number" name="numChunks" value="3" required />
+        <button type="submit">Run</button>
+      </form>
+    </div>
 
-  <h2>3. Zone Sales FO Day Chunk Summary</h2>
-  <form action="/fo-day-chunk-summary" method="POST">
-    Base Date (DD-MON-YY): <input type="text" name="baseDate" required><br>
-    Chunk Days: <input type="number" name="chunkDays" required><br>
-    Number of Chunks: <input type="number" name="numChunks" required><br>
-    <button type="submit">Run Query</button>
-  </form>
+    <!-- Month chunk form -->
+    <div class="tab-panel hidden" id="monthChunk">
+      <h3>VDD Month Chunk Summary</h3>
+      <form id="form-month-chunk" class="query-form">
+        <label>Base Month (YYYYMM)</label>
+        <input type="text" name="baseMonth" required />
+        <label>Chunk Months</label>
+        <input type="number" name="chunkMonths" value="3" required />
+        <button type="submit">Run</button>
+      </form>
+    </div>
 
-  <h2>4. Zone Sales FO Month Chunk Summary</h2>
-  <form action="/fo-month-chunk-summary" method="POST">
-    Base Month (YYYYMM): <input type="text" name="baseMonth" required><br>
-    Chunk Months: <input type="number" name="chunkMonths" required><br>
-    <button type="submit">Run Query</button>
-  </form>
+    <!-- FO Day chunk form -->
+    <div class="tab-panel hidden" id="foDay">
+      <h3>Zone Sales — FO Day Chunk</h3>
+      <form id="form-fo-day" class="query-form">
+        <label>Base Date</label>
+        <input type="text" name="baseDate" class="date-input" placeholder="DD-MON-YY" required />
+        <label>Chunk Days</label>
+        <input type="number" name="chunkDays" value="30" required />
+        <label>Number of Chunks</label>
+        <input type="number" name="numChunks" value="1" required />
+        <button type="submit">Run</button>
+      </form>
+    </div>
+
+    <!-- FO Month chunk form -->
+    <div class="tab-panel hidden" id="foMonth">
+      <h3>Zone Sales — FO Month Chunk</h3>
+      <form id="form-fo-month" class="query-form">
+        <label>Base Month (YYYYMM)</label>
+        <input type="text" name="baseMonth" required />
+        <label>Chunk Months</label>
+        <input type="number" name="chunkMonths" value="3" required />
+        <button type="submit">Run</button>
+      </form>
+    </div>
+
+    <!-- Results area -->
+    <div id="results-area" class="hidden">
+      <div class="results-controls">
+        <button id="btn-export-csv">Export CSV</button>
+        <button id="btn-export-excel">Export Excel</button>
+        <button id="btn-copy">Copy</button>
+        <button id="btn-print">Print</button>
+      </div>
+
+      <div id="table-wrapper">
+        <table id="results-table" class="display" style="width:100%">
+          <thead id="results-thead"></thead>
+          <tbody id="results-tbody"></tbody>
+        </table>
+      </div>
+
+      <h3>Chart</h3>
+      <canvas id="results-chart"></canvas>
+    </div>
+  </div>
+
+  <!-- JS libs -->
+  <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+  <!-- Our main script -->
+  <script src="/js/main.js"></script>
 </body>
 
 </html>
